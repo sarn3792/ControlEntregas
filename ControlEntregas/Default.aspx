@@ -61,10 +61,14 @@
                                 <asp:BoundField HeaderText="Teléfono" DataField="Telefono" />
                                 <asp:BoundField HeaderText="Email" DataField="Email" />
                                 <asp:BoundField HeaderText="Grupo" DataField="Grupo" />
-                                <%--<asp:BoundField HeaderText="Estatus" DataField="Activo" />--%>
                                 <asp:TemplateField HeaderText="Activo">
                                     <ItemTemplate>
                                         <asp:CheckBox ID="chkActivo" runat="server" AutoPostBack="true" OnCheckedChanged="chkSelect_CheckedChanged" Checked='<%# Eval("Activo") %>' />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Button ID="btnAbrirSitio" runat="server" OnClick="btnAbrirSitio_Click" Text="Abrir sitio" CssClass="btn btn-primary top-buffer"/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

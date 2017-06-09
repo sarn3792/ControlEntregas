@@ -170,5 +170,19 @@ namespace ControlEntregas
                 throw ex;
             }
         }
+
+        protected void btnAbrirSitio_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GridViewRow row = ((GridViewRow)((Button)sender).NamingContainer);
+                String id = row.Cells[0].Text;
+                String URL = "";
+                Response.Write("<script>window.open('" + URL + "','_blank');</script>");
+            } catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

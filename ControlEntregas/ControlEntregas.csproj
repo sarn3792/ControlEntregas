@@ -105,12 +105,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Devices.aspx" />
+    <Content Include="GetDelivers.aspx" />
+    <Content Include="Images\maps-and-flags.png" />
     <Content Include="Images\Progreso.gif" />
+    <Content Include="Images\ship.png" />
+    <Content Include="Images\smartphone.png" />
+    <Content Include="Images\statistics.png" />
+    <Content Include="Images\team.png" />
+    <Content Include="Images\UN.jpg" />
     <Content Include="Logout.aspx" />
+    <Content Include="Main.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="PushDelivers.aspx" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -134,12 +144,13 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="Images\UN.jpg" />
     <Content Include="Login.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Tracker.aspx" />
+    <Content Include="Users.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +166,20 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Devices.aspx.cs">
+      <DependentUpon>Devices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Devices.aspx.designer.cs">
+      <DependentUpon>Devices.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetDelivers.aspx.cs">
+      <DependentUpon>GetDelivers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GetDelivers.aspx.designer.cs">
+      <DependentUpon>GetDelivers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -169,7 +194,35 @@
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PushDelivers.aspx.cs">
+      <DependentUpon>PushDelivers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PushDelivers.aspx.designer.cs">
+      <DependentUpon>PushDelivers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Tracker.aspx.cs">
+      <DependentUpon>Tracker.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Tracker.aspx.designer.cs">
+      <DependentUpon>Tracker.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users.aspx.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Users.aspx.designer.cs">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
