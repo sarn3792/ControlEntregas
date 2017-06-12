@@ -22,7 +22,7 @@ namespace ControlEntregas
 
             if (!IsPostBack) //first time
             {
-                this.LoadClientes();
+                this.LoadClientes().Wait();
             }
         }
 
@@ -31,7 +31,7 @@ namespace ControlEntregas
             try
             {
                 await this.SaveClientes();
-                this.LoadClientes();
+                await this.LoadClientes();
                 this.LimpiarCampos();
                 this.MostarMensaje(false);
             }
@@ -41,7 +41,7 @@ namespace ControlEntregas
             }
         }
 
-        private void LoadClientes()
+        private async Task LoadClientes()
         {
             try
             {
@@ -49,7 +49,7 @@ namespace ControlEntregas
                 {
                     client.BaseAddress = new Uri(APISettings.API_URL);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage response = client.GetAsync("api/Clientes").Result;
+                    HttpResponseMessage response = await client.GetAsync("api/Clientes").ConfigureAwait(false);
                     if (response.IsSuccessStatusCode)
                     {
                         List<Cliente> clientes = response.Content.ReadAsAsync<IEnumerable<Cliente>>().Result.ToList();
@@ -62,7 +62,8 @@ namespace ControlEntregas
                     }
                 }
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -81,9 +82,16 @@ namespace ControlEntregas
                     cliente.grupo = txtGrupo.Text.Trim();
                     cliente.nombreEmpresa = txtNombreEmpresa.Text.Trim();
                     cliente.telefono = txtTelefono.Text.Trim();
+                    //cliente.contactoSistemas = "probando async";
+                    //cliente.email = "probando async";
+                    //cliente.grupo = "probando async";
+                    //cliente.nombreEmpresa = "probando async";
+                    //cliente.telefono = "probando async";
+
+
 
                     client.BaseAddress = new Uri(APISettings.API_URL);
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Clientes", cliente);
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Clientes", cliente).ConfigureAwait(false);
                     response.EnsureSuccessStatusCode();
                 }
             }
@@ -104,7 +112,7 @@ namespace ControlEntregas
                     cliente.idCliente = Convert.ToInt32(id);
 
                     client.BaseAddress = new Uri(APISettings.API_URL);
-                    HttpResponseMessage response = await client.PutAsJsonAsync("api/Clientes/Estatus", cliente);
+                    HttpResponseMessage response = await client.PutAsJsonAsync("api/Clientes/Estatus", cliente).ConfigureAwait(false);
                     response.EnsureSuccessStatusCode();
                 }
             }
@@ -164,7 +172,7 @@ namespace ControlEntregas
                 CheckBox cb1 = (CheckBox)gvClientes.Rows[index].FindControl("chkActivo");
                 await this.UpdateStatus(cb1.Checked, id);
                 MostarMensaje(false, "Registro actualizado correctamente");
-            } 
+            }
             catch (Exception ex)
             {
                 throw ex;
@@ -179,7 +187,8 @@ namespace ControlEntregas
                 String id = row.Cells[0].Text;
                 String URL = "";
                 Response.Write("<script>window.open('" + URL + "','_blank');</script>");
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 throw ex;
             }
