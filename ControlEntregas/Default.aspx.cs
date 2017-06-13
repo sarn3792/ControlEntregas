@@ -185,7 +185,7 @@ namespace ControlEntregas
             {
                 GridViewRow row = ((GridViewRow)((Button)sender).NamingContainer);
                 String id = row.Cells[0].Text;
-                String URL = "";
+                String URL = "Main.aspx";
                 Response.Write("<script>window.open('" + URL + "','_blank');</script>");
             }
             catch (Exception ex)
