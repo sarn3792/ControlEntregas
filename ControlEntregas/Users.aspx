@@ -42,6 +42,19 @@
             padding: 10px;
             width: 50%;
         }
+
+        .btnAdd {
+            background-image: url('Images/plus.png');
+            width: 50%;
+            height: 25px;
+            opacity: 0.5;
+        }
+
+        .btnSmall {
+            height: 30px !important;
+            padding: 0px 5px 0px 5px !important;
+            /*background-color: #67b346;*/
+        }
     </style>
     <title>Users</title>
 </head>
@@ -70,18 +83,21 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="row">
-                        <div class="col-sm-9 text-center">
-                            <asp:Label ID="lblMensaje" runat="server" Visible="false"></asp:Label>
+                        <div class="col-sm-11 text-center">
+                            <div style="margin-left: 8.33%">
+                                <asp:Label ID="lblMensaje" runat="server" Visible="false"></asp:Label>
+                            </div>
                         </div>
-                        <div class="col-sm-3 text-right">
-                            <asp:ImageButton ID="btnOpen" runat="server" Text="Show Modal Popup"/>
+                        <div class="col-sm-1 text-right">
+                            <%--<asp:Button ID="btnAgregar" runat="server" CssClass="btnAdd"/>--%>
+                            <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-primary top-buffer btnSmall" Text="Agregar" />
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div style="overflow-x: auto; width: 100%">
+                    <div style="overflow-x: auto; width: 100%; margin-top: 5px;">
                         <asp:GridView ID="gvUsuarios" runat="server" AutoGenerateColumns="false" CssClass="table table-hover table-striped" GridLines="None">
                             <Columns>
                                 <asp:BoundField HeaderText="ID" DataField="idUser" ItemStyle-CssClass="hiddenCol" HeaderStyle-CssClass="hiddenCol" />
@@ -100,12 +116,11 @@
                 </div>
             </div>
             <br />
-            <br />
             <!-- ModalPopupExtender -->
-            <ajaxToolkit:ModalPopupExtender ID="mp1" runat="server" PopupControlID="Panel1" TargetControlID="btnOpen"
+            <ajaxToolkit:ModalPopupExtender ID="mp1" runat="server" PopupControlID="pnlPopUp" TargetControlID="btnAgregar"
                 CancelControlID="btnCancelar" BackgroundCssClass="modalBackground">
             </ajaxToolkit:ModalPopupExtender>
-            <asp:Panel ID="Panel1" runat="server" CssClass="modalPopup" align="center" Style="display: none">
+            <asp:Panel ID="pnlPopUp" runat="server" CssClass="modalPopup" align="center" Style="display: none">
                 <div style="height: 50%">
                     <div class="row">
                         <div class="col-sm-12">
@@ -140,6 +155,28 @@
                                         </asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="revEmail" runat="server" ControlToValidate="txtEmail" ValidationExpression="^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*@((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$" ErrorMessage="Sólo emails" ForeColor="Red" ValidationGroup="GuardarUsuario">
                                         </asp:RegularExpressionValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-4 text-right">
+                                        <asp:Label ID="lblContrasena" Text="Contraseña:" runat="server"></asp:Label>
+                                    </td>
+                                    <td class="col-sm-8 text-left">
+                                        <asp:TextBox ID="txtContrasena" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvContrasena" runat="server" ControlToValidate="txtContrasena" ValidationGroup="GuardarUsuario" Text="Ingrese contraseña" ForeColor="Red">
+                                        </asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revContrasena" ControlToValidate="txtContrasena"  ValidationExpression="^[\s\S]{6,}$" runat="server" ErrorMessage="Mínimo 6 caracteres requeridos" ForeColor="Red" ValidationGroup="GuardarUsuario"></asp:RegularExpressionValidator>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-sm-4 text-right">
+                                        <asp:Label ID="lblConfirmarContrasena" Text="Confirmar contraseña:" runat="server"></asp:Label>
+                                    </td>
+                                    <td class="col-sm-8 text-left">
+                                        <asp:TextBox ID="txtConfirmarContrasena" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvConfirmarContrasena" runat="server" ControlToValidate="txtConfirmarContrasena" ValidationGroup="GuardarUsuario" Text="Ingrese confirmar contraseña" ForeColor="Red">
+                                        </asp:RequiredFieldValidator>
+                                        <asp:CompareValidator ID="cmpConfirmarContrasena" runat="server" ControlToValidate="txtConfirmarContrasena" ControlToCompare="txtContrasena" ErrorMessage="Contraseñas no coinciden" ForeColor="Red" ValidationGroup="GuardarUsuario"></asp:CompareValidator>
                                     </td>
                                 </tr>
                             </table>

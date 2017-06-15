@@ -35,3 +35,4 @@ C:\Users\Samuel\documents\visual studio 2015\Projects\ControlEntregas\ControlEnt
 C:\Users\Samuel\documents\visual studio 2015\Projects\ControlEntregas\ControlEntregas\bin\System.Net.Http.Formatting.xml
 C:\Users\Samuel\documents\visual studio 2015\Projects\ControlEntregas\ControlEntregas\obj\Debug\ControlEntregas.dll
 C:\Users\Samuel\documents\visual studio 2015\Projects\ControlEntregas\ControlEntregas\obj\Debug\ControlEntregas.pdb
+C:\Users\Samuel\documents\visual studio 2015\Projects\ControlEntregas\ControlEntregas\obj\Debug\ControlEntregas.csprojResolveAssemblyReference.cache

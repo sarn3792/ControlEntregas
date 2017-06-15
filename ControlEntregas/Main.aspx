@@ -33,8 +33,22 @@
             margin-bottom: 8% !important;
         }
 
-        .menu div div a img:hover {
+            .menu div div a img:hover {
+                background-color: gray;
+            }
+
+        .modalBackground {
             background-color: gray;
+            filter: alpha(opacity=90);
+            opacity: 0.8;
+        }
+
+        .modalPopup {
+            background-color: #fff;
+            border: 3px solid #ccc;
+            border-radius: 6px;
+            padding: 10px;
+            width: 50%;
         }
     </style>
     <title>Main</title>
@@ -90,8 +104,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
-        </div>
+            <br />
+            <!-- Popup -->
         </div>
     </form>
 </body>

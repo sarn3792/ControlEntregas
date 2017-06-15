@@ -82,13 +82,6 @@ namespace ControlEntregas
                     cliente.grupo = txtGrupo.Text.Trim();
                     cliente.nombreEmpresa = txtNombreEmpresa.Text.Trim();
                     cliente.telefono = txtTelefono.Text.Trim();
-                    //cliente.contactoSistemas = "probando async";
-                    //cliente.email = "probando async";
-                    //cliente.grupo = "probando async";
-                    //cliente.nombreEmpresa = "probando async";
-                    //cliente.telefono = "probando async";
-
-
 
                     client.BaseAddress = new Uri(APISettings.API_URL);
                     HttpResponseMessage response = await client.PostAsJsonAsync("api/Clientes", cliente).ConfigureAwait(false);
@@ -185,8 +178,11 @@ namespace ControlEntregas
             {
                 GridViewRow row = ((GridViewRow)((Button)sender).NamingContainer);
                 String id = row.Cells[0].Text;
-                String URL = "Main.aspx";
-                Response.Write("<script>window.open('" + URL + "','_blank');</script>");
+                //Create session variable that will be used to check customer in other pages
+                Session["CustomerID"] = id;
+                Response.Redirect("Main.aspx");
+                //String URL = "Main.aspx";
+                //Response.Write("<script>window.open('" + URL + "','_blank');</script>");
             }
             catch (Exception ex)
             {

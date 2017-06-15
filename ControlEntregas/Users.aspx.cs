@@ -15,6 +15,11 @@ namespace ControlEntregas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["user"] == null)
+            {
+                Response.Redirect("Login.aspx");
+            }
+
             if (!IsPostBack) //first time
             {
                 this.LoadUsers().Wait();
@@ -46,7 +51,8 @@ namespace ControlEntregas
                 {
                     client.BaseAddress = new Uri(APISettings.API_URL);
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage response = await client.GetAsync("api/Account/GetUsers?customer=2").ConfigureAwait(false);
+                    //Get users based on CustomerID
+                    HttpResponseMessage response = await client.GetAsync(String.Format("api/Account/GetUsers?customer={0}", Convert.ToInt32(Session["CustomerID"].ToString()))).ConfigureAwait(false); //modify to get real customer ID
                     if (response.IsSuccessStatusCode)
                     {
                         List<IDUser> clientes = response.Content.ReadAsAsync<IEnumerable<IDUser>>().Result.ToList();
@@ -86,6 +92,32 @@ namespace ControlEntregas
             }
         }
 
+        private async Task SaveCustomer()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    RegisterBindingModel data = new RegisterBindingModel();
+                    data.FullName = txtNombreCompleto.Text.Trim();
+                    data.Position = txtPosicion.Text.Trim();
+                    data.Email = txtEmail.Text.Trim();
+                    data.Enabled = true;
+                    data.fkCliente = Convert.ToInt32(Session["CustomerID"].ToString()); //Session Atribute must be here
+                    data.Password = txtContrasena.Text;
+                    data.ConfirmPassword = txtConfirmarContrasena.Text;
+
+                    client.BaseAddress = new Uri(APISettings.API_URL);
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Account/Register", data).ConfigureAwait(false);
+                    response.EnsureSuccessStatusCode();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         private void MostarMensaje(bool error, String mensaje)
         {
             if (!error)
@@ -102,9 +134,34 @@ namespace ControlEntregas
             }
         }
 
-        protected void btnGuardarUsuario_Click(object sender, EventArgs e)
+        protected async void btnGuardarUsuario_Click(object sender, EventArgs e)
         {
-            //The fields are cleared so that next time that popup is shown does not display older values
+            try
+            {
+                await this.SaveCustomer();
+                await this.LoadUsers();
+                this.LimpiarCampos();
+                this.MostarMensaje(false, "Usuario guardado exitosamente");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
+        private void LimpiarCampos() //The fields are cleared so that next time that popup is shown does not display older values
+        { 
+            try
+            {
+                txtNombreCompleto.Text = String.Empty;
+                txtPosicion.Text = String.Empty;
+                txtEmail.Text = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

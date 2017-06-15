@@ -112,6 +112,7 @@
     <Content Include="Devices.aspx" />
     <Content Include="GetDelivers.aspx" />
     <Content Include="Images\maps-and-flags.png" />
+    <Content Include="Images\plus.png" />
     <Content Include="Images\Progreso.gif" />
     <Content Include="Images\ship.png" />
     <Content Include="Images\smartphone.png" />
@@ -162,6 +163,7 @@
     <Compile Include="Code\Beans\Cliente.cs" />
     <Compile Include="Code\Beans\IDUser.cs" />
     <Compile Include="Code\Beans\Login.cs" />
+    <Compile Include="Code\Beans\RegisterBindingModel.cs" />
     <Compile Include="Code\Controllers\LoginController.cs" />
     <Compile Include="Code\Models\LoginModel.cs" />
     <Compile Include="Default.aspx.cs">
