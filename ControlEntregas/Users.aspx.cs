@@ -163,5 +163,51 @@ namespace ControlEntregas
                 throw ex;
             }
         }
+
+        protected void btnEliminarUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GridViewRow row = ((GridViewRow)((Button)sender).NamingContainer);
+                String id = row.Cells[0].Text;
+                Session["userIdToEliminate"] = id; //The variable is used on Eliminar event
+                lblNombreUsuario.Text = String.Format("¿Estás seguro de eliminar a <strong>{0}</strong>?", row.Cells[1].Text);
+                mpYesNo.Show();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        protected async void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                await this.EliminarUsuario();
+                MostarMensaje(false, "Usuario eliminado correctamente");
+                await this.LoadUsers();
+            } catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private async Task EliminarUsuario()
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(APISettings.API_URL);
+                    HttpResponseMessage response = await client.DeleteAsync(String.Format("api/Account/Delete/{0}", Session["userIdToEliminate"].ToString()));
+                    response.EnsureSuccessStatusCode();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

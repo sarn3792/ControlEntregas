@@ -43,6 +43,14 @@
             width: 50%;
         }
 
+        .modalPopupSmall {
+            background-color: #fff;
+            border: 3px solid #ccc;
+            border-radius: 6px;
+            padding: 10px;
+            width: 20%;
+        }
+
         .btnAdd {
             background-image: url('Images/plus.png');
             width: 50%;
@@ -110,6 +118,11 @@
                                         <asp:CheckBox ID="chkActivo" runat="server" AutoPostBack="true" OnCheckedChanged="chkActivo_CheckedChanged" Checked='<%# Eval("status") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Button ID="btnEliminarUsuario" runat="server" Text="Eliminar" CssClass="btn btn-primary top-buffer" OnClick="btnEliminarUsuario_Click" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                     </div>
@@ -165,7 +178,7 @@
                                         <asp:TextBox ID="txtContrasena" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                                         <asp:RequiredFieldValidator ID="rfvContrasena" runat="server" ControlToValidate="txtContrasena" ValidationGroup="GuardarUsuario" Text="Ingrese contraseña" ForeColor="Red">
                                         </asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revContrasena" ControlToValidate="txtContrasena"  ValidationExpression="^[\s\S]{6,}$" runat="server" ErrorMessage="Mínimo 6 caracteres requeridos" ForeColor="Red" ValidationGroup="GuardarUsuario"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revContrasena" ControlToValidate="txtContrasena" ValidationExpression="^[\s\S]{6,}$" runat="server" ErrorMessage="Mínimo 6 caracteres requeridos" ForeColor="Red" ValidationGroup="GuardarUsuario"></asp:RegularExpressionValidator>
                                     </td>
                                 </tr>
                                 <tr>
@@ -185,6 +198,20 @@
                 </div>
                 <asp:Button ID="btnGuardarUsuario" runat="server" Text="Guardar" ValidationGroup="GuardarUsuario" OnClick="btnGuardarUsuario_Click" CssClass="btn btn-primary top-buffer" />
                 <asp:Button ID="btnCancelar" Text="Cancelar" runat="server" CssClass="btn btn-primary top-buffer" />
+            </asp:Panel>
+            <!--PopUp yes no question-->
+            <asp:Label ID="lblHidden" runat="server" Text=""></asp:Label>
+            <ajaxToolkit:ModalPopupExtender ID="mpYesNo" runat="server" PopupControlID="pnlYesNo" BackgroundCssClass="modalBackground" CancelControlID="btnCancelarYesNo"
+                TargetControlID="lblHidden">
+            </ajaxToolkit:ModalPopupExtender>
+            <asp:Panel ID="pnlYesNo" runat="server" CssClass="modalPopupSmall" align="center" Style="display: none">
+                <div class="text-center">
+                    <asp:Label ID="lblNombreUsuario" runat="server"></asp:Label>
+                    <br />
+                    <br />
+                    <asp:Button ID="btnEliminar" CssClass="btn btn-primary top-buffer" Text="Sí" runat="server" OnClick="btnEliminar_Click" />
+                    <asp:Button ID="btnCancelarYesNo" Text="No" runat="server" CssClass="btn btn-primary top-buffer" />
+                </div>
             </asp:Panel>
         </div>
     </form>
